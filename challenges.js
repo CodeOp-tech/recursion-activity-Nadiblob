@@ -141,7 +141,25 @@ const z = [[1, 0, -3, [2, 4], [3]], 4, [[4, 3], [[5, -3], -1], [6, [[[10]]]]], [
 console.log(addGridItems(z)); // 50
 ------------------*/
 
-function addGridItems(grid) {}
+function addGridItems(grid) {  //<-- what the internet says. 
+  let sum = 0;
+  for (let i = 0; i < grid.length; i++) {
+    const item = grid[i];
+    if (Array.isArray(item)) {
+      sum += addGridItems(item);
+    } else {
+      sum += item;
+    }
+  }
+  return sum;
+}
+
+const y = [[[1], [2]]];
+console.log(addGridItems(y)); // 3
+const x = [[[1, 0, -3], [2, 4], [3]], [[4, 4, 3], [5, -3, -1], [6, 10]], [[7, -5, -5], [8, 0], [9, 1]]];
+console.log(addGridItems(x)); // 50
+const z = [[1, 0, -3, [2, 4], [3]], 4, [[4, 3], [[5, -3], -1], [6, [[[10]]]]], [[7, -5, -5], [8, 0], [9, 1]]];
+console.log(addGridItems(z)); // 50
 
 /*------------------
 7) Write a sortedInsert() function which inserts a node into 
@@ -191,9 +209,58 @@ class Node {
 }
 
 function sortedInsert(head, value) {
-  // Your code goes here.
+    const newNode = new Node(value);
+  
+    if (!head || value < head.value) {
+      newNode.next = head;
+      return newNode;
+    }
+  
+    let current = head;
+    while (current.next && value > current.next.value) {
+      current = current.next;
+    }
+  
+    newNode.next = current.next;
+    current.next = newNode;
+  
+    return head;
+  }
   // Remember to return the head of the list.
-}
+
+
+//Test cases:
+
+const head1 = new Node(1, new Node(2, new Node(3)));
+const sorted1 = sortedInsert(head1, 4);
+console.log(
+  sorted1.value,
+  sorted1.next.value,
+  sorted1.next.next.value,
+  sorted1.next.next.next.value
+); // 1 2 3 4
+
+const head2 = new Node(1, new Node(7, new Node(8)));
+const sorted2 = sortedInsert(head2, 5);
+console.log(
+  sorted2.value,
+  sorted2.next.value,
+  sorted2.next.next.value,
+  sorted2.next.next.next.value
+); // 1 5 7 8
+
+const head3 = new Node(3, new Node(5, new Node(9)));
+const sorted3 = sortedInsert(head3, 1);
+console.log(
+  sorted3.value,
+  sorted3.next.value,
+  sorted3.next.next.value,
+  sorted3.next.next.next.value
+); // 1 3 5 9
+
+const head4 = null;
+const sorted4 = sortedInsert(head4, 1);
+console.log(sorted4.value); // 1
 
 /*------------------
 7) Can you re-do exercises 1 to 5 using tail call optimization?
