@@ -10,8 +10,15 @@ console.log(factorial(7)); // 5040
 
 function factorial(x) {
   // base case
+  if (x === 0) {
+    return 1;
+  }
   // recursive case
+  return x * factorial(x - 1);
 }
+
+console.log(factorial(3)); // 6
+console.log(factorial(7)); // 5040 //returns: 42 
 
 /*------------------
 2)
@@ -27,8 +34,15 @@ console.log(createStars(0)); // ""
 
 function createStars(l) {
   // base case
+  if (l === 0) {
+    return "";
+  }
   // recursive case
+  return "*" + createStars(l - 1);
 }
+
+console.log(createStars(5)); // "*****"
+console.log(createStars(0)); // ""
 
 /*------------------
 3)
@@ -43,10 +57,19 @@ console.log(addUpTo(3)); // 6 (1 + 2 + 3)
 console.log(addUpTo(100)); // 5050 (1 + 2 + ... + 99 + 100)
 ------------------*/
 
-function addUpTo(n) {
+function addUpTo(n, m) {
   // base case
+  if (n === 1) {
+  return 1;
+  }
   // recursive case
+  return n + addUpTo(n - 1);
 }
+
+console.log(addUpTo(1)); // 1
+console.log(addUpTo(2)); // 3 (1 + 2)
+console.log(addUpTo(3)); // 6 (1 + 2 + 3)
+console.log(addUpTo(100)); // 5050 (1 + 2 + ... + 99 + 100)
 
 /*------------------
 4)
@@ -62,8 +85,12 @@ console.log(sum([1, 2, 3, 4, 5, 6])); // 21
 
 function sum(arr) {
   // base case
+  if (arr.length === 0) return 0;
   // recursive case
+  return arr.pop() + sum(arr);
 }
+
+console.log(sum([1, 2, 3, 4, 5, 6])); // 21
 
 /*------------------
 5)
@@ -87,8 +114,17 @@ console.log(fib(7)); // 21
 
 function fib(n) {
   // base case
+  if (n <= 1) return 1
+
   // recursive case
+  return fib(n - 1) + fib(n - 2);
 }
+
+console.log(fib(0)); // 1
+console.log(fib(1)); // 1
+console.log(fib(2)); // 2
+console.log(fib(3)); // 3
+console.log(fib(7)); // 21
 
 /*------------------
 6)
